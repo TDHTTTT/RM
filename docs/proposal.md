@@ -19,14 +19,14 @@ it also challenges competitors to do efficient imitation learning with a tight t
                                                                                          
                                                                                                                       
 ## Algorithms
-The algorithms to be used are primarily RL with a focus on imitation learning. Since [MineRL competition][1] prohibits any model heavily relying on human domain knowledge, it is important for us to keep in it mind when designing the reward. It might also be possible to use other ML algorithms to facilitate the task, for example behavior cloning might be helpful as the success of [end to end learning of self-driving cars][3] suggests.                                                                                                   
+The algorithms to be used are primarily RL with a focus on imitation learning. Since [MineRL competition][1] prohibits any model heavily relying on human domain knowledge, it is important for us to keep it in mind when designing the reward. It might also be possible to use other ML algorithms to facilitate the task, for example behavior cloning might be helpful as the success of [end to end learning of self-driving cars][3] suggests.                                                                                                   
                                                                                                                       
 ## Evaluation Plan                                                                                                    
 The [MineRL competition][1] provides a metric for evaluation:
 
 ![metric][2]
 
-Since we might not be able to reach the final task or even may subtasks, we could also use the time it takes for us to reach a certain goal as a metric. 
+Since we might not be able to reach the final task or even many subtasks, we could also use the time it takes for us to reach a certain goal as a metric. 
 
                                                                                                                       
 ## Appointment   
