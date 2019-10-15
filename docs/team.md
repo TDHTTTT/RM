@@ -12,5 +12,5 @@ title:  Team
 ## Kevin Tarhan
 ***UCI Net ID***: ktarhan
 
-## USER 3
-***UCI Net ID***: ucinetid3
+## Sergio Ramirez
+***UCI Net ID***: sergioir
