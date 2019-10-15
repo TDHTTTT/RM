@@ -30,6 +30,7 @@ Since we might not be able to reach the final task or even many subtasks, we cou
 
                                                                                                                       
 ## Appointment   
+Oct.17, 4;30pm
 
 
 [1]: http://minerl.io/competition/
