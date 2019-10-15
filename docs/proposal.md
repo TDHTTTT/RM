@@ -14,7 +14,8 @@ The project is based on [MineRL competition][1]. The goal is to use no more than
 it also challenges competitors to do efficient imitation learning with a tight time and resource budget. Given the scope and difficulty of this project, we may not be able to reach the end goal. So our plan is to tackle the subtasks from the order of difficulty:
 + Navigation
 + Treechop
-+ Obtain Item
++ Obtain Items
++ Craft Items
 + Survival
                                                                                          
                                                                                                                       
@@ -26,7 +27,7 @@ The [MineRL competition][1] provides a metric for evaluation:
 
 ![metric][2]
 
-Since we might not be able to reach the final task or even many subtasks, we could also use the time it takes for us to reach a certain goal as a metric. 
+Since we might not be able to reach the final task or even many subtasks, we could also use the time it takes for us to reach a certain goal, or the number of goals that we reach, as a metric. 
 
                                                                                                                       
 ## Appointment   
