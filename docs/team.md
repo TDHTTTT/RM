@@ -9,8 +9,8 @@ title:  Team
 ## Tony Tong 
 ***UCI Net ID***: daohangt 
 
-## USER 2
-***UCI Net ID***: ucinetid2
+## Kevin Tarhan
+***UCI Net ID***: ktarhan
 
-## USER 3
-***UCI Net ID***: ucinetid3
+## Sergio Ramirez
+***UCI Net ID***: sergioir
