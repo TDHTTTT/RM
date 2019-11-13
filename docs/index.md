@@ -2,14 +2,13 @@
 layout: default
 title:  Home
 ---
-
 ![Minecraft Text](images/minecraftlogo.jpg)
 
-Source code: https://github.com/TDHTTTT/Reinforcement-Mining 
+## Source code: https://github.com/TDHTTTT/Reinforcement-Mining 
 
-Reports:
+## Reports:
 
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
+### - [Proposal](proposal.html)
+### - [Status](status.html)
+### - [Final](final.html)
 
