@@ -3,6 +3,8 @@ layout: default
 title:  Home
 ---
 
+![Minecraft Text](images/minecraftlogo.jpg)
+
 Source code: https://github.com/TDHTTTT/Reinforcement-Mining 
 
 Reports:
