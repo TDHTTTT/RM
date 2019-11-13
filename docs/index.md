@@ -4,11 +4,14 @@ title:  Home
 ---
 ![Minecraft Text](images/minecraftlogo.jpg)
 
-## Source code: [Reinforcement Mining Github](https://github.com/TDHTTTT/Reinforcement-Mining)
+### Source code: [Reinforcement Mining Github](https://github.com/TDHTTTT/Reinforcement-Mining)
 
-## Reports:
+### Summary:
+Improving upon baseline algorithms for solving the Navigation component of the MineRL competition.
 
-### - [Proposal](proposal.html)
-### - [Status](status.html)
-### - [Final](final.html)
+### Reports:
+
+>#### - [Proposal](proposal.html)
+>#### - [Status](status.html)
+>#### - [Final](final.html)
 
