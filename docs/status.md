@@ -20,9 +20,15 @@ Amongst other MineRL environments like “MineRLNavigate-vO” and “MineRLNavi
 
 As stated previously in our approach, we’re determined to improve upon the already established GAIL baseline provided. While the GAIL baseline works great as is, we were interested in methods that would lead to greater reward outputs and shorter episode runtimes. Following this format, we’ll be comparing the results of the already provided GAIL algorithm gathered from numerous episodes against those gathered from our own implementation, with primary focus into reward and average policy value outputs to help in determining efficiency. The reason for choosing this evaluation approach is the fact that our implementation of GAIL follows policy update intervals that have been halved from the original baseline, which we believe could lead to faster learning.
 
+![Image](images/data1.png)  ![Image](images/data2.png)
+
 Before jumping into our own evaluation, it should be known that the GAIL baseline has a provided overview of experimental results following the 100 best contiguous episodic runs the agent had performed in. The data for NavigateDense as seen in the table above shows the anticipated agent’s reward for each episode, accompanied with a standard deviation to account for variability within the environment. Additionally, there is a provided graphic to be seen how the baseline performs against other Reinforcement Learning agents like Behavioral Cloning.
 
+![Image](images/reward_bef.png)  ![Image](images/policy_average_bef.png)
+
 Upon running the baseline GAIL algorithm and compiling all the reward outputs, it can be seen above in the graph labeled “Episodic Rewards” that the policy performs in a manner respective of the data shown before, with rewards ranging from 59.32 +- 30.60. Right beside it, the graph “Episodic Reward Average” shows us how the agent is performing in terms of learning with an uptake in anticipated average reward per episode.
+
+![Image](images/reward_aft.png)  ![Image](images/policy_average_aft.png)
 
 In comparison to our own improvement of the GAIL algorithm, the agent undergoing our planned changes appears to be receiving on average a reward of 51.75 (standard deviation not calculated) that doesn’t quite match the average reward efficiency of the baseline GAIL algorithm, just being shy by 7.57. However, by comparing the two’s learning performance, the improved version appears to be learning at a faster rate than that of the baseline, with average reward uptake increasing at a faster rate than previously before. For episodes 53 to 81 our improved version’s learning performance isn’t quite to par with the baseline’s, but shortly afterwards begins to overtake it again. Through further testing, we hope that our improved version can demonstrate it’s a fast learner.
 
