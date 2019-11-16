@@ -12,7 +12,9 @@ title:  Team
 ## Kevin Tarhan 
 ***UCI Net ID***: ktarhan
 
-![Image](images/kevintarhan.jpg)
+![Kevin](images/kevintarhan.jpg)
 
 ## Sergio Ramirez
 ***UCI Net ID***: sergioir
+
+![Sergio](images/SergioRamirez.jpg)
