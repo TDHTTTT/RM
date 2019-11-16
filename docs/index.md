@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-![Minecraft](images/blogmcnet.png)
+![Minecraft](images/minecraftlogo.jpg)
 
 ### Source code: [Reinforcement Mining Github](https://github.com/TDHTTTT/Reinforcement-Mining)
 
