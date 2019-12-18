@@ -5,6 +5,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import ast
+import seaborn as sns
 
 def get_reward(l,xs,ys):
     xs.append(int(l.split()[-2].split(":")[-1]))
@@ -35,6 +36,9 @@ def plot1(X,Y,n):
 
 def plotN(Xs,Yss,lkup,labels):
     lkup["R"] = "Rewards"
+    LINE_STYLES = ['solid', 'dashed', 'dashdot', 'dotted']
+    sns.reset_orig()  # get default matplotlib styles back
+    clrs = sns.color_palette('husl', n_colors=len(labels))  # a list of RGB tuples
     for k,v in lkup.items():
         if len(labels) < 5:
             fig, ax = plt.subplots()
@@ -44,7 +48,7 @@ def plotN(Xs,Yss,lkup,labels):
         ax.set_xlabel("Episodes")
         ax.set_ylabel(v)
         for i in range(len(Xs)):
-            ax.plot(Xs[i],Yss[i][k],alpha=0.5,label=labels[i])
+            ax.plot(Xs[i],Yss[i][k],alpha=0.5,label=labels[i],ls=LINE_STYLES[i%len(LINE_STYLES)],color=clrs[i])
         if len(labels) < 5:
             ax.legend()
         else:
