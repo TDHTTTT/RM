@@ -59,6 +59,8 @@ Finally, the last hyperparameter our group chose to alter was the `--discriminat
 From these results gathered so far, the `--discriminator-update-interval` hyperparameter achieved some of the best results overall in comparison to other hyperparameters `--policy-update-interval` and `--original-reward-weight`. By changing DUI, the agent was able to attain higher rewards over all episodes and managed to stay within the same range of average policy values as the other hyperparameters, shying from the top spot that ORW won with 17.72 by a mere 0.26. We believe that by altering the DUI portion of the GAIL algorithm – maybe even with changes to ORW – there are even further methods of improvement to be made, but with the results we currently have DUI-4000 is our best performing improvement by far. Following this are further analysis made amongst other data sets gathered during our testing that go further in-depth for each metric.
 
 
+Apart from the key metrics such as Reward and Runtimes, we also explored the following metrics across all the models with different hyperparameters. Although the following metrics are not our immediate focus, they do carry some information which can be used to assess the performance and robustness of the agents.
+
 ### Discriminator Average Loss
 ![dal](images/all-discriminator_average_loss.png)
 <center>Fig.X Discriminator Average Loss</center>
