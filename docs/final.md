@@ -13,15 +13,11 @@ In our status update, we chose to revise aspects of the GAIL baseline from MineR
 ## Approaches
 In our previous attempt at improving GAIL we had noticed from observing our agent in early episodes that it would tend to get stuck if surrounded by blocks that resembled diamond (water and sky blocks), so we adjusted the policy update interval by cutting it in half. We inferred that reducing this interval would shorten the episodes in which the agent was stuck, thus improving training time. 
 
-![Image](images/pui.png)
-
 <script src="https://gist.github.com/TDHTTTT/2cff94b041f900c4ad1124b12f8cbed7.js"></script>
 
 For our final report, we wanted to continue along this same approach, by adjusting various hyperparamaters to find a combination that would deliver a capable agent in the shortest amount of time. To begin with, we realized that our change to the policy update interval was a somewhat arbitrary decision. Cutting it in half showed us that it was a beneficial change, but could we do better? Our group decided to train several agents, each at a different policy update interval: 400, 600, 800, and 1000. We also ran several experiments on how changes to `--discriminator-update-interval` and `--original-reward-weight` would affect the success of our agent. More specifically, for discriminator update interval, we tried 2000, 3000, 4000 and 5000; for original reward weight, we tried 6 and 8. Note that we also trained a baseline model with `--discriminator-update-interval=6000, --policy-update-interval=2000, --original-reward-weight=10`, which are the suggested default value from the [basline library][1]. We theorized that the  discriminator update interval functions similarly to the policy update interval in that it will shorten the duration of each episode, potentially decreasing training time. However, we also believed that decreasing this value too much would make it difficult for the agent to learn from each episode with the shortened amount of time. The evaluation section of this report will show the results from these experiments.
 
 Another approach we took was to use the default hyper-parameters of the GAIL agent, but initialize the policy parameters using Behavioral Cloning. This was mentioned in the GAIL paper, and the researchers were confident that doing so would dramatically improve learning speed because BC requires no environment interaction. 
-
-![Pretrain](images/Pretrain.png)
 
 <script src="https://gist.github.com/TDHTTTT/7ac4050d8c3a1ce5f104d312c3f93f00.js"></script>
 
@@ -49,6 +45,9 @@ The general trend for all the agents we have tested are the same upward trend, w
 ### Policy Average Value Loss
 ![dal](images/all-policy_average_value_loss.png)
 <center>Fig.X Policy Average Value Loss</center>
+
+We observe the similar general trend for discriminator average loss
+
 
 ### Discriminator Average Entropy
 ![dal](images/all-discriminator_average_entropy.png)
