@@ -47,10 +47,16 @@ Moving on to our second method towards improving the baseline GAIL, we decided i
 The general trend for all the agents we have tested are the same upward trend, which is not something we want in the ideal case. Ideally, the loss should decrease with more training and finally converge to a stable value. Although it is hard to figure out the reason for such unfavorable behavior, from the metrics of agents with different hyperparameters, we could gain some insights. Firstly, note that with smaller policy update interval, the discriminator tends to have lower loss and thus perform better. On the other hand, with smaller discriminator update interval, the discriminator tends to have higher loss. We think the smaller policy update interval makes the discriminator easier to overfit and have lower loss.
 
 ### Policy Average Value Loss
+![dal](images/all-policy_average_value_loss.png)
+<center>Fig.X Policy Average Value Loss</center>
 
 ### Discriminator Average Entropy
+![dal](images/all-discriminator_average_entropy.png)
+<center>Fig.X Discriminator Average Entropy</center>
 
 ### Policy Average Entropy
+![dal](images/all-policy_average_entropy.png)
+<center>Fig.X Policy Average Entropy</center>
 
 
 ## References
