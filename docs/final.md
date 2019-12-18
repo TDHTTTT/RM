@@ -23,6 +23,8 @@ Another approach we took was to use the default hyper-parameters of the GAIL age
 
 ![Pretrain](images/Pretrain.png)
 
+<script src="https://gist.github.com/TDHTTTT/7ac4050d8c3a1ce5f104d312c3f93f00.js"></script>
+
 It should also be mentioned that there were two versions of policy optimization that we could use for GAIL: one with Proximal Policy Optimization (PPO) and another with Trust Region Policy Optimization (TRPO). TRPO performs consistenly well, but is too computationally complex to be used in the time we had for this project. Furthermore, PPO offers nearly as good performance at far less a cost, so it was the method we opted for. 
 
 ## Evaluation
