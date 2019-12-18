@@ -40,13 +40,13 @@ Moving on to our second method towards improving the baseline GAIL, we decided i
 ![dal](images/all-discriminator_average_loss.png)
 <center>Fig.X Discriminator Average Loss</center>
 
-The general trend for all the agents we have tested are the same upward trend, which is not something we want in the ideal case. Ideally, the loss should decrease with more training and finally converge to a stable value. Although it is hard to figure out the reason for such unfavorable behavior, from the metrics of agents with different hyperparameters, we could gain some insights. Firstly, note that with smaller policy update interval, the discriminator tends to have lower loss and thus perform better. On the other hand, with smaller discriminator update interval, the discriminator tends to have higher loss. We think the smaller policy update interval makes the discriminator easier to overfit and have lower loss.
+The general trend for all the agents we have tested are the same upward trend, which is not something we want in the ideal case. Ideally, the loss should decrease with more training and finally converge to a stable value. Although it is hard to figure out the reason for such unfavorable behavior, from the metrics of agents with different hyperparameters, we could gain some insights. Firstly, note that with smaller policy update interval, the discriminator tends to have lower loss and thus perform better. On the other hand, with smaller discriminator update interval, the discriminator tends to have higher loss. We think the smaller policy update interval makes the discriminator easier to overfit and have lower loss. Also, updating discriminator seems to put too more weights on less observation which could harm the performance of discriminator.
 
 ### Policy Average Value Loss
 ![dal](images/all-policy_average_value_loss.png)
 <center>Fig.X Policy Average Value Loss</center>
 
-We observe the similar general trend for discriminator average loss
+We observe the similar general trend for policy average value loss and discriminator average loss. However, one important difference is that the policy average value loss tends to have more oscillation than the discriminator one, making it hard to conclude if the policy loss is converging to a certain value or not. However, the general upward trend for policy average value loss does imply a good exploratory effort as the policy will change during exploration. Comparing to the other hyperparameters, the original reward weight seems to have a more significant impact on the policy average value loss. More specifically, the lower the weight is, the better the loss performance will be.
 
 
 ### Discriminator Average Entropy
