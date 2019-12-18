@@ -30,6 +30,7 @@ As previously mentioned in our approach, we’ve made several different changes 
 
 (BASELINE ANALYSIS TO BE INCLUDED)
 
+![pui](images/pui-1.png)
 ![dal](images/pui-mesh-R.png) ![dal](images/pui-mesh-PA.png)
 ![dal](images/pui-mesh-T.png)
 
