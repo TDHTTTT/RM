@@ -45,7 +45,7 @@ One method our group went with towards improving the baseline GAIL was to first 
 
 ![dui](images/orw-1.png)
 <p align="center"> 
-<img src="images/pui-run.png">
+<img src="images/orw-run.png">
 </p>
 ![dal](images/orw-mesh-R.png) ![dal](images/orw-mesh-PA.png)
 ![dal](images/orw-mesh-T.png)
