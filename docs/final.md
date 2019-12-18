@@ -53,6 +53,8 @@ We observe the similar general trend for policy average value loss and discrimin
 ![dal](images/all-discriminator_average_entropy.png)
 <center>Fig.X Discriminator Average Entropy</center>
 
+Entropy is a representation of the randomness within an episode. An ideal graph would show the agent’s entropy decreasing over time, which is what we see in the graph here. We can observe that when DUI is reduced to 4000, the discriminators average entropy is at its lowest. We deduced that 4000 was the in the ideal range, and decreasing the value any further doesn’t allow enough time for the discriminator to make adequate updates each episode, which is why we see diminishing returns when we reduce the value. It should also be noted that while reductions in entropy are generally favored, some randomness can be beneficial in helping the agent make “guesses” that expedite the training process.
+
 ### Policy Average Entropy
 ![dal](images/all-policy_average_entropy.png)
 <center>Fig.X Policy Average Entropy</center>
