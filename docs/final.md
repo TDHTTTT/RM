@@ -59,6 +59,7 @@ Entropy is a representation of the randomness within an episode. An ideal graph 
 ![dal](images/all-policy_average_entropy.png)
 <center>Fig.X Policy Average Entropy</center>
 
+As we observed in the loss, the policy entropy shows more oscillation than discriminator entropy due to the constant change of policy along the training.
 
 ## References
 
