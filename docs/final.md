@@ -90,7 +90,7 @@ Entropy is a representation of the randomness within an episode. An ideal graph 
 ![dal](images/all-policy_average_entropy.png)
 <center>Fig.X Policy Average Entropy</center>
 
-Like the discriminator graph above, the general trend for all changes is downward on the policy graph as well. Also, the policy entropy graph follows a similar sporadic oscillation to the policy value loss graph, which again makes discerning if the values are converging somewhat challenging. What we can learn from this graph is that all of our changes do not dramatically affect the overall entropy loss over time as the agent trains through more episodes. This is significant because it lets us know that none of our various hyper-parameters will negatively impact the 
+Like the discriminator graph above, the general trend for all changes is downward on the policy graph as well. Also, the policy entropy graph follows a similar sporadic oscillation to the policy value loss graph, which again makes discerning if the values are converging somewhat challenging. What we can learn from this graph is that all of our changes do not dramatically affect the overall entropy loss over time as the agent trains through more episodes. This is significant because it lets us know that none of our various hyper-parameters will negatively impact the entropy of the agent.
 
 ## References
 
