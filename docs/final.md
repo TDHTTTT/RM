@@ -35,7 +35,9 @@ As previously mentioned in our approach, we’ve made several different changes 
 ### Policy Update Interval (PUI)
 
 ![pui](images/pui-1.png)
-![pui](images/pui-run.png)
+<p align="center"> 
+<img src="images/pui-run.png">
+</p>
 ![dal](images/pui-mesh-R.png) ![dal](images/pui-mesh-PA.png)
 ![dal](images/pui-mesh-T.png)
 
