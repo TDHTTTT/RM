@@ -36,8 +36,7 @@ As previously mentioned in our approach, we’ve made several different changes 
 <p align="center"> 
 <img src="images/pui-run.png">
 </p>
-![dal](images/pui-mesh-R.png) ![dal](images/pui-mesh-PA.png)
-![dal](images/pui-mesh-T.png)
+<center>Fig.1 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on PUI</center>
 
 One method our group went with towards improving the baseline GAIL was to first change the `--policy-update-interval` value (PUI for brevity sake) hyperparameter to differ from the default provided. What the PUI does regarding the agent’s performance is based around the expert dataset used within the GAIL algorithm that our agent trains upon. Using Inverse Reinforcement Learning (IRL), our agent’s performance is analyzed using a cost function. This result is compared against various instances of the expert data set that are also analyzed with the IRL cost function, subsequently setting the maximal value obtained to be the new policy that our agent follows. This overall explains how our agent is training/learning within its respective environment. We decided to change these values from the default PUI to 400, 600, 800, and 1000, observing the results of these changes shown in the graphs above. As seen in the “Rewards” graph each change more or less appears to be performing to the same standard as before, however by taking a closer look at the values its shown that PUI-600 delivers the highest average over all rewards collected throughout all episodes with an average of 47.61 (standard deviation not calculated) compared to the rest; PUI-400: 47.03, PUI-800: 47.18, and PUI-1000: 44.84. While interesting, this unfortunately does not compare to the baseline’s best average result of 59.32 +- 30.6. This result in accordance follows that PUI-600 delivers the best policy average value as well visualized within the “policy_average_value” graph, with 17.20 average in comparison to the rest; PUI-400: 15.77, PUI-800: 14.97, and PUI-1000: 14.50. These policy average values show the uptake/rate an agent is improving upon within each episode and the rewards it gathers. Strangely enough, all these results seem to perform under-par with our original change made in the status report when we halved the PUI value, as that change not only gave us higher rewards, but also policy average values that showed the agent was learning at a faster rate than the baseline, something these PUI’s shown here are failing to achieve. Nonetheless, runtimes among the different PUI’s all seem to be performing at the same pace, with episodes ranging from the <5 minute mark up to 30 minutes for increasingly difficult environments. Yet, majority of these episodes reside within the <5 minute mark, showing that our agent is able to perform well enough within simple environments amidst the Minecraft world.
 
@@ -47,8 +46,7 @@ One method our group went with towards improving the baseline GAIL was to first 
 <p align="center"> 
 <img src="images/orw-run.png">
 </p>
-![dal](images/orw-mesh-R.png) ![dal](images/orw-mesh-PA.png)
-![dal](images/orw-mesh-T.png)
+<center>Fig.2 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on ORW</center>
 
 Moving on to our second method towards improving the baseline GAIL, we decided it best to alter the `--original-reward-weight` (ORW) hyperparameter to observe how this would affect the uptake/rate at which the agent learns including the reward values obtained. The ORW hyperparameter is essentially a constant used within the GAIL algorithm that works in tandem with the discriminator (more info on this in the next section) to calculate reward values for the actions our agent takes. By altering this value however, it should be noted that reward values will significantly differ from the original baseline GAIL, and that the goal in this situation is to improve primarily on the learning rate. This time around, we decided to change the ORW value to work with 6, 8, and 10 as the constants. Once again, as seen in the graph labeled “Rewards” each ORW change appears to be working similarly, with rewards varying around the 50 mark. Upon looking closer however, ORW-8 garners the highest average over all rewards within all episodes ran with the agent, achieving an average of 51.81 as compared to the rest; ORW-6: 46.63, and ORW-10: 48.10. Although, regarding the results gathered from average policy value as seen in the graph “policy_average_value”, ORW-10 had the better average at 17.72 compared to its counterparts; ORW-6: 13.76, and ORW-8: 15.34. As mentioned, we’re primarily looking at faster learning rates considering we’re directly affecting the reward values obtained, and such ORW-8 appears to be the leading contender in this regard. While it may not compare with the baseline’s 59.32 reward, it most certainly has the capabilities of teaching an agent the ability to learn faster. Unfortunately, in terms of runtime all the ORW hyperparameter changes don’t measure up to PUI hyperparameter changes. When observing both hyperparameters’ runtime graphs, ORW has a denser number of episodes that go up to the 30-minute mark, whereas PUI is a bit sparser in that area having most of its runtimes in the <5-minute mark.
 
@@ -58,8 +56,7 @@ Moving on to our second method towards improving the baseline GAIL, we decided i
 <p align="center"> 
 <img src="images/dui-run.png">
 </p>
-![dal](images/dui-mesh-R.png) ![dal](images/dui-mesh-PA.png)
-![dal](images/dui-mesh-T.png)
+<center>Fig.3 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on DUI</center>
 
 Finally, the last hyperparameter our group chose to alter was the `--discriminator-update-interval` (DUI). The discriminator for the GAIL algorithm functions as a normalizer. That is, it helps for normalization of observations and results generated by the algorithm with the intent to optimize the agent. Similar to the previously mentioned PUI, DUI executes an akin strategy utilizing a low cost function instead in ordinance with the data from the expert set that in turn updates its own parameters within the GAIL algorithm. This time we went with values 2000, 3000, 4000, and 5000 to fit the hyperparameter. To our surprise, the DUI changes had attained some of the best rewards than any of the other hyperparameter changes. Looking closer at the “Rewards,” DUI-4000 had the highest reward average over all episodes at 55.02 beating its partners; DUI-2000: 46.91, DUI-3000: 44.35, and DUI-5000: 48.68. This result surmounts our previously unbeatable improvement on halving the PUI back in our status report which received a 51.75 reward. Following this, we observed the average policy values from “policy_average_value” and saw DUI-5000 had the better of the values at an average policy of 17.46 with partners not trailing too far; DUI-2000: 17.41, DUI-3000: 16.12, DUI-4000: 16.67. Even more surprising was our observation of the runtimes for each change to the hyperparameter. No longer were we restrained to the <5-minute or 30-minute marks, instead there were varying effects. DUI-2000 averaged around the 10-minute mark, DUI-3000 at the 15-minute mark, DUI-4000 at the 20-minute mark, and DUI-5000 switching between <5-minute and 30-minute marks.
 
@@ -69,26 +66,26 @@ Apart from the key metrics such as Reward, Average Policy Value, and Runtimes, w
 
 ### Discriminator Average Loss
 ![dal](images/all-discriminator_average_loss.png)
-<center>Fig.X Discriminator Average Loss</center>
+<center>Fig.4 Discriminator average loss across all agents</center>
 
 The general trend for all the agents we have tested are the same upward trend, which is not something we want in the ideal case. Ideally, the loss should decrease with more training and finally converge to a stable value. Although it is hard to figure out the reason for such unfavorable behavior, from the metrics of agents with different hyperparameters, we could gain some insights. Firstly, note that with smaller policy update interval, the discriminator tends to have lower loss and thus perform better. On the other hand, with smaller discriminator update interval, the discriminator tends to have higher loss. We think the smaller policy update interval makes the discriminator easier to overfit and have lower loss. Also, updating discriminator seems to put too more weights on less observation which could harm the performance of discriminator.
 
 ### Policy Average Value Loss
 ![dal](images/all-policy_average_value_loss.png)
-<center>Fig.X Policy Average Value Loss</center>
+<center>Fig.5 Policy average value loss across all agents</center>
 
 We observe the similar general trend for policy average value loss and discriminator average loss. However, one important difference is that the policy average value loss tends to have more oscillation than the discriminator one, making it hard to conclude if the policy loss is converging to a certain value or not. However, the general upward trend for policy average value loss does imply a good exploratory effort as the policy will change during exploration. Comparing to the other hyperparameters, the original reward weight seems to have a more significant impact on the policy average value loss. More specifically, the lower the weight is, the better the loss performance will be.
 
 
 ### Discriminator Average Entropy
 ![dal](images/all-discriminator_average_entropy.png)
-<center>Fig.X Discriminator Average Entropy</center>
+<center>Fig.6 Discriminator average entropy across all agents</center>
 
 Entropy is a representation of the randomness within an episode. An ideal graph would show the agent’s entropy decreasing over time, which is what we see in the graph here. We can observe that when DUI is reduced to 4000, the discriminators average entropy is at its lowest. We deduced that 4000 was the in the ideal range, and decreasing the value any further doesn’t allow enough time for the discriminator to make adequate updates each episode, which is why we see diminishing returns when we reduce the value. It should also be noted that while reductions in entropy are generally favored, some randomness can be beneficial in helping the agent make “guesses” that expedite the training process.
 
 ### Policy Average Entropy
 ![dal](images/all-policy_average_entropy.png)
-<center>Fig.X Policy Average Entropy</center>
+<center>Fig.7 Policy average entropy across all agents</center>
 
 Like the discriminator graph above, the general trend for all changes is downward on the policy graph as well. Also, the policy entropy graph follows a similar sporadic oscillation to the policy value loss graph, which again makes discerning if the values are converging somewhat challenging. What we can learn from this graph is that all of our changes do not dramatically affect the overall entropy loss over time as the agent trains through more episodes. This is significant because it lets us know that none of our various hyper-parameters will negatively impact the 
 
