@@ -1,11 +1,8 @@
----
-layout: default
-title: Final Report
----
-
 ## Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TawD7v3okHQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=TawD7v3okHQ" target="_blank"><img src="http://img.youtube.com/vi/TawD7v3okHQ/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 
 ## Summary
 The focus of this project is to train an agent that can successfully complete MineRLNavigateDense-vO from the MineRL competition. In this task, the agent must navigate a forest with the goal of locating a diamond block. The block can be positioned below or above the level of the agent. The agent distinguishes the goal block based on unique visual features compared to surrounding blocks. We chose navigate dense as opposed to navigate, because the dense environment provides a positive/negative reward to the agent every tick based on it's performance, while navigate is more sparse in it's rewarding. 
@@ -15,13 +12,53 @@ In our status update, we chose to revise aspects of the GAIL baseline from MineR
 ## Approaches
 In our previous attempt at improving GAIL we had noticed from observing our agent in early episodes that it would tend to get stuck if surrounded by blocks that resembled diamond (water and sky blocks), so we adjusted the policy update interval by cutting it in half. We inferred that reducing this interval would shorten the episodes in which the agent was stuck, thus improving training time. 
 
-<script src="https://gist.github.com/TDHTTTT/2cff94b041f900c4ad1124b12f8cbed7.js"></script>
+```bash
+# NavigateDense
+python3 gail.py \
+  --gpu 0 --env MineRLNavigateDense-v0 --outdir results/MineRLNavigateDense-v0/gail \
+  --policy ppo --frame-skip 8 --frame-stack 1 --num-camera-discretize 7 \
+  --expert ./expert_dataset --action-wrapper multi-dimensional-softmax \
+  --gamma 0.95 --gray-scale --policy-entropy-coef 0.005 \
+  --discriminator-entropy-coef 0.005 --policy-update-interval 2000 \
+  --policy-minibatch-size 200 --original-reward-weight 10 \
+  --discriminator-update-interval 6000 --discriminator-minibatch-size 600 \
+  --pretrain --training-dataset-ratio 0.5 
+```
 
 For our final report, we wanted to continue along this same approach, by adjusting various hyperparamaters to find a combination that would deliver a capable agent in the shortest amount of time. To begin with, we realized that our change to the policy update interval was a somewhat arbitrary decision. Cutting it in half showed us that it was a beneficial change, but could we do better? Our group decided to train several agents, each at a different policy update interval: 400, 600, 800, and 1000. We also ran several experiments on how changes to `--discriminator-update-interval` and `--original-reward-weight` would affect the success of our agent. More specifically, for discriminator update interval, we tried 2000, 3000, 4000 and 5000; for original reward weight, we tried 6 and 8. Note that we also trained a baseline model with `--discriminator-update-interval=6000, --policy-update-interval=2000, --original-reward-weight=10`, which are the suggested default value from the [basline library][1]. We theorized that the  discriminator update interval functions similarly to the policy update interval in that it will shorten the duration of each episode, potentially decreasing training time. However, we also believed that decreasing this value too much would make it difficult for the agent to learn from each episode with the shortened amount of time. The evaluation section of this report will show the results from these experiments.
 
 Another approach we took was to use the default hyper-parameters of the GAIL agent, but initialize the policy parameters using Behavioral Cloning. This was mentioned in the GAIL paper, and the researchers were confident that doing so would dramatically improve learning speed because BC requires no environment interaction. 
 
-<script src="https://gist.github.com/TDHTTTT/7ac4050d8c3a1ce5f104d312c3f93f00.js"></script>
+```python
+# pretrain
+if args.pretrain:
+    bc_opt = chainer.optimizers.Adam(alpha=2.5e-4)
+    bc_opt.setup(policy)
+    bc_agent = BehavioralCloning(policy, bc_opt,
+                                 minibatch_size=1024,
+                                 action_wrapper=args.action_wrapper)
+    all_obs = []
+    all_action = []
+    for i in range(experts.size):
+        obs, action, _, _, _ = experts.sample()
+        all_obs.append(obs)
+        all_action.append(action)
+    if args.frame_stack > 1:
+        all_obs = np.array(all_obs, dtype=LazyFrames)
+    else:
+        all_obs = np.array(all_obs)
+    all_action = np.array(all_action)
+    if args.action_wrapper == 'discrete':
+        logger.debug('Action histogram:',
+                     np.histogram(all_action, bins=n_actions)[0])
+
+    num_train_data = int(experts.size * args.training_dataset_ratio)
+    train_obs = all_obs[:num_train_data]
+    train_acs = all_action[:num_train_data]
+    validate_obs = all_obs[num_train_data:]
+    validate_acs = all_action[num_train_data:]
+    bc_agent.train(train_obs, train_acs, validate_obs, validate_acs)
+```
 
 It should also be mentioned that there were two versions of policy optimization that we could use for GAIL: one with Proximal Policy Optimization (PPO) and another with Trust Region Policy Optimization (TRPO). TRPO performs consistenly well, but is too computationally complex to be used in the time we had for this project. Furthermore, PPO offers nearly as good performance at far less a cost, so it was the method we opted for. 
 
@@ -32,10 +69,8 @@ As previously mentioned in our approach, we’ve made several different changes 
 
 ### Policy Update Interval (PUI)
 
-![pui](images/pui-1.png)
-<p align="center"> 
-<img src="images/pui-run.png">
-</p>
+![pui](docs/images/pui-1.png)
+![pui](docs/images/pui-run.png)
 <center>Fig.1 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on PUI</center>
 <br/>
 
@@ -43,10 +78,8 @@ One method our group went with towards improving the baseline GAIL was to first 
 
 ### Original Reward Weight (ORW)
 
-![dui](images/orw-1.png)
-<p align="center"> 
-<img src="images/orw-run.png">
-</p>
+![orw](docs/images/orw-1.png)
+![orw](docs/images/orw-run.png)
 <center>Fig.2 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on ORW</center>
 <br/>
 
@@ -54,10 +87,8 @@ Moving on to our second method towards improving the baseline GAIL, we decided i
 
 ### Discriminator Update Interval (DUI)
 
-![dui](images/dui-1.png)
-<p align="center"> 
-<img src="images/dui-run.png">
-</p>
+![dui](docs/images/dui-1.png)
+![dui](docs/images/dui-run.png)
 <center>Fig.3 Key metrics (upper left: Reward, upper right: policy_average_value, lower: Runtimes) for experiments on DUI</center>
 <br/>
 
@@ -68,14 +99,14 @@ From these results gathered so far, the `--discriminator-update-interval` hyperp
 Apart from the key metrics such as Reward, Average Policy Value, and Runtimes, we also explored the following metrics across all the models with different hyperparameters. Although the following metrics are not our immediate focus, they do carry some information which can be used to assess the performance and robustness of the agents.
 
 ### Discriminator Average Loss
-![dal](images/all-discriminator_average_loss.png)
+![dal](docs/images/all-discriminator_average_loss.png)
 <center>Fig.4 Discriminator average loss across all agents</center>
 <br/>
 
 The general trend for all the agents we have tested are the same upward trend, which is not something we want in the ideal case. Ideally, the loss should decrease with more training and finally converge to a stable value. Although it is hard to figure out the reason for such unfavorable behavior, from the metrics of agents with different hyperparameters, we could gain some insights. Firstly, note that with smaller policy update interval, the discriminator tends to have lower loss and thus perform better. On the other hand, with smaller discriminator update interval, the discriminator tends to have higher loss. We think the smaller policy update interval makes the discriminator easier to overfit and have lower loss. Also, updating discriminator seems to put too more weights on less observation which could harm the performance of discriminator.
 
 ### Policy Average Value Loss
-![dal](images/all-policy_average_value_loss.png)
+![dal](docs/images/all-policy_average_value_loss.png)
 <center>Fig.5 Policy average value loss across all agents</center>
 <br/>
 
@@ -83,14 +114,14 @@ We observe the similar general trend for policy average value loss and discrimin
 
 
 ### Discriminator Average Entropy
-![dal](images/all-discriminator_average_entropy.png)
+![dal](docs/images/all-discriminator_average_entropy.png)
 <center>Fig.6 Discriminator average entropy across all agents</center>
 <br/>
 
 Entropy is a representation of the randomness within an episode. An ideal graph would show the agent’s entropy decreasing over time, which is what we see in the graph here. We can observe that when DUI is reduced to 4000, the discriminators average entropy is at its lowest. We deduced that 4000 was the in the ideal range, and decreasing the value any further doesn’t allow enough time for the discriminator to make adequate updates each episode, which is why we see diminishing returns when we reduce the value. It should also be noted that while reductions in entropy are generally favored, some randomness can be beneficial in helping the agent make “guesses” that expedite the training process.
 
 ### Policy Average Entropy
-![dal](images/all-policy_average_entropy.png)
+![dal](docs/images/all-policy_average_entropy.png)
 <center>Fig.7 Policy average entropy across all agents</center>
 <br/>
 
@@ -104,7 +135,7 @@ Like the discriminator graph above, the general trend for all changes is downwar
 
 [PPO vs TRPO][3]
 
-[1]: https://arxiv.org/pdf/1606.03476.pdf)
+[1]: https://arxiv.org/pdf/1606.03476.pdf
 
 [2]: https://github.com/minerllabs/baselines/tree/master/general/chainerrl#getting-started
 
